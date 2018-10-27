@@ -1,61 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b82ce9c-5a96-429e-9bc2-b399b6e1c4cb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/file.out" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pack.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/control.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/focus.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/osc.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/osc/client.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/osc/server.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/Date.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/List.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/Map.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/MultiMap.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/OrderedMap.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/Set.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/app.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/array2d.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/class.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/compat.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/comprehension.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/config.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/data.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/dir.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/file.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/func.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/import_into.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/init.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/input.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/lapp.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/lexer.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/luabalanced.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/operator.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/path.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/permute.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/pretty.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/seq.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/sip.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/strict.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/stringio.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/stringx.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/tablex.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/template.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/test.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/text.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/types.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/url.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/utils.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl/xml.lua" />
+    <list default="true" id="6b82ce9c-5a96-429e-9bc2-b399b6e1c4cb" name="Default" comment="Add interface control">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.lua" afterPath="$PROJECT_DIR$/main.lua" />
     </list>
     <ignored path="focus.iws" />
@@ -81,8 +28,8 @@
       <file leaf-file-name="main.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="184">
+              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -131,10 +78,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main.lua" />
         <option value="$PROJECT_DIR$/osc.lua" />
         <option value="$PROJECT_DIR$/control.lua" />
         <option value="$PROJECT_DIR$/osc/server.lua" />
+        <option value="$PROJECT_DIR$/main.lua" />
       </list>
     </option>
   </component>
@@ -684,12 +631,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1540649793164</updated>
-      <workItem from="1540649797166" duration="12414000" />
+      <workItem from="1540649797166" duration="13053000" />
     </task>
+    <task id="LOCAL-00001" summary="Add interface control">
+      <created>1540665934071</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1540665934071</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12414000" />
+    <option name="totallyTimeSpent" value="13053000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -709,6 +664,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -718,7 +674,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -732,6 +687,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add interface control" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add interface control" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -768,8 +727,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="184">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
           <folding />
         </state>
       </provider>
