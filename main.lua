@@ -42,7 +42,8 @@ function newBlock(x, y, w, h)
 end
 
 function love.keypressed(key)
-   if player.y == groundLevel and key == "space" then
+   hitEdge = collisions(player, world)[1]
+   if (player.y == groundLevel or hitEdge ~= nil) and key == "space" then
       player.vy = jumpPower
    end
 end
@@ -50,9 +51,9 @@ end
 function love.update(dt)
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
-   hitEdge = collisions(player, world)
-   if hitEdge[1] ~= nil then
-      player.y = hitEdge[2].x + hitEdge[2].h
+   hitEdge = collisions(player, world)[1]
+   if hitEdge ~= nil then
+      player.y = hitEdge[2].y + hitEdge[2].h
       player.vy = 0
    end
    if player.y < groundLevel then
@@ -142,9 +143,10 @@ function collisions(obj, world)
    rektdBy = {}
    box = boundingPoints(obj)
    for i, obstacle in ipairs(world) do
-      for i = 1, #box do
-	 if inside(box[i], obstacle) then
-	    rektdBy[#rektdBy+1] = {i, obstacle}
+      for j = 1, #box do
+	 if inside(box[j], obstacle) then
+	    rektdBy[#rektdBy+1] = {j, obstacle}
+	    break
 	 end
       end
    end
