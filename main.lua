@@ -1,18 +1,16 @@
 function love.load()
-   gravity = 750
+   gravity = 1000
    speed = 150
    floatFactor = 0.2
    groundLevel = 100
-   player = { x = 50,
-	      y = groundLevel,
-	      vx = 0,
-	      vy = 0 }
+   jumpPower = 300
+   player = { x = 50, y = groundLevel, vx = 0, vy = 0 }
    winx, winy = love.graphics.getDimensions()
 end
 
 function love.keypressed(key)
    if player.y == groundLevel and key == "space" then
-		player.vy = player.vy + 200
+      player.vy = jumpPower
    end
 end
 
