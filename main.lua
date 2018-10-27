@@ -50,6 +50,11 @@ end
 function love.update(dt)
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
+   hitEdge = collisions(player, world)
+   if hitEdge[1] ~= nil then
+      player.y = hitEdge[2].x + hitEdge[2].h
+      player.vy = 0
+   end
    if player.y < groundLevel then
       player.y = groundLevel
       player.vy = 0
@@ -61,9 +66,11 @@ function love.update(dt)
       end
    end
    if love.keyboard.isDown("left") then
-      player.x = player.x - speed * dt
+      player.vx = -speed
    elseif love.keyboard.isDown("right") then
-      player.x = player.x + speed * dt
+      player.vx = speed
+   else
+      player.vx = 0
    end
    --[[
    local info = love.thread.getChannel( 'info' ):pop()
@@ -101,6 +108,7 @@ function love.draw()
       block = world[i]
       love.graphics.rectangle("fill", block.x, winy - block.y, block.w, -block.h)
    end
+   love.graphics.print(tostring(collisions(player, world)[1]))
    love.graphics.setColor(1, 1, 1)
    love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
@@ -126,14 +134,17 @@ function inside(p, obj)
    return between(p, bounds[1], bounds[2])
 end
 
+-- 1 : Bottom left
+-- 2 : Top Right
+-- 3 : Top Left
+-- 4 : Bottom Right
 function collisions(obj, world)
    rektdBy = {}
-   points = boundingPoints(obj)
+   box = boundingPoints(obj)
    for i, obstacle in ipairs(world) do
-      for i = 1, #points do
-	 if inside(points[i], obstacle) then
-	    rektdBy[#rektdBy+1] = obstacle
-	    break
+      for i = 1, #box do
+	 if inside(box[i], obstacle) then
+	    rektdBy[#rektdBy+1] = {i, obstacle}
 	 end
       end
    end
