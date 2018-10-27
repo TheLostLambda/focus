@@ -99,6 +99,8 @@ function boundingPoints(obj)
    points = {}
    points[1] = {obj.x, obj.y}
    points[2] = {obj.x + obj.w, obj.y + obj.h}
+   points[3] = {obj.x, obj.y + obj.h}
+   points[4] = {obj.x + obj.w, obj.y}
    return points
 end
 
@@ -106,7 +108,24 @@ function between(p, p1, p2)
    return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
 end
 
---function collisions()
+function inside(p, obj)
+   bounds = boundingPoints(obj)
+   return between(p, bounds[1], bounds[2])
+end
+
+function collisions(obj, world)
+   rektdBy = {}
+   points = boundingPoints(obj)
+   for i, obstacle in ipairs(world) do
+      for i = 1, #points do
+	 if inside(points[i], obstacle) then
+	    rektdBy[#rektdBy+1] = obstacle
+	    break
+	 end
+      end
+   end
+   return rektdBy
+end
 --[[
 function handLeft()
    io.write("!LLLLL!")
