@@ -1,11 +1,20 @@
 function love.load()
-   gravity = 1000
-   speed = 150
-   floatFactor = 0.2
+   gravity = 2000
+   speed = 230
+   floatFactor = 0.5
    groundLevel = 100
-   jumpPower = 300
+   jumpPower = 575
+   world = {}
    player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
+   newBlock(500, 100, 50, 150)
+   newBlock(550, 100, 50, 100)
+   newBlock(600, 100, 150, 20)
+   newBlock(750, 100, 50, 100)
+end
+
+function newBlock(x, y, w, h)
+	world[#world+1] = {x = x, y = y, w = w, h = h}
 end
 
 function love.keypressed(key)
@@ -35,6 +44,11 @@ function love.update(dt)
 end
    
 function love.draw()
+   for i = 1, #world do  
+      love.graphics.setColor(1,0,0)
+      block = world[i]
+      love.graphics.rectangle("fill", block.x, winy - block.y, block.w, -block.h)
+   end
    love.graphics.setColor(1, 1, 1)
    love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
