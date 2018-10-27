@@ -1,5 +1,6 @@
 function love.load()
-   gravity = 400
+   gravity = 1000
+   floatFactor = 0.2
    groundLevel = 100
    player = { x = 50,
 	      y = groundLevel,
@@ -21,7 +22,11 @@ function love.update(dt)
       player.y = groundLevel
       player.vy = 0
    else
-     player.vy = player.vy - gravity * dt
+      if love.keyboard.isDown("space") then
+	 player.vy = player.vy - gravity * dt * floatFactor
+      else
+	 player.vy = player.vy - gravity * dt
+      end
    end
 end
    
