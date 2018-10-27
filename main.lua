@@ -39,4 +39,16 @@ function love.draw()
    love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
+   love.graphics.print(tostring(between({2,3}, {1,1}, {3,3})))
+end
+
+function boundingPoints(obj)
+   points = {}
+   points[1] = {obj.x, obj.y}
+   points[2] = {obj.x + obj.w, obj.y + obj.h}
+   return points
+end
+
+function between(p, p1, p2)
+   return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
 end
