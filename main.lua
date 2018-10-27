@@ -1,5 +1,6 @@
 function love.load()
    gravity = 50
+   justJumped = false
    groundLevel = 100
    player = { x = 50,
 	      y = groundLevel,
@@ -10,8 +11,12 @@ end
 function love.update(dt)
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
-   if love.keyboard.isDown("space") then
-      player.vy = player.vy + 200 * dt
+   if love.keyboard.isDown("space") and not justJumped then
+      player.vy = player.vy + 200
+      justJumped = true
+   end
+   if not love.keyboard.isDown("space") then
+      justJumped = false
    end
    if player.y < groundLevel then
       player.y = groundLevel
