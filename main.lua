@@ -1,3 +1,7 @@
+require "control"
+
+local thread
+
 function love.load()
    gravity = 1000
    speed = 150
@@ -6,6 +10,10 @@ function love.load()
    jumpPower = 300
    player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
+
+    thread = love.thread.newThread( [[require "control"
+   control.setup(love)]] )
+    thread:start( 99, 1000 )
 end
 
 function love.keypressed(key)
@@ -20,6 +28,9 @@ function love.update(dt)
    if player.y < groundLevel then
       player.y = groundLevel
       player.vy = 0
+   end
+
+
    else
       if love.keyboard.isDown("space") then
 	 player.vy = player.vy - gravity * dt * floatFactor
@@ -31,7 +42,12 @@ function love.update(dt)
        player.x = player.x - speed * dt
     elseif love.keyboard.isDown("right") then
        player.x = player.x + speed * dt
-    end
+end
+--io.write("Im awake")
+local info = love.thread.getChannel( 'info' ):pop()
+if info then
+io.write(info)
+end
 end
    
 function love.draw()
