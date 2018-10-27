@@ -45,7 +45,15 @@ function love.update(dt)
    --io.write("Im awake")
    local info = love.thread.getChannel( 'info' ):pop()
    if info then
-      io.write(info)
+      io.write(info.."\n")
+      if string.match(info, "waveIn") then
+         io.write("!!!")
+         handLeft()
+      elseif string.match(info, "waveOut") then
+         handRight()
+      elseif string.match(info, "fist") then
+         handFist()
+      end
    end
 end
 
@@ -56,6 +64,7 @@ function love.draw()
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
    love.graphics.print(tostring(between({2,3}, {1,1}, {3,3})))
 end
+
 
 function boundingPoints(obj)
    points = {}
@@ -69,3 +78,16 @@ function between(p, p1, p2)
 end
 
 function collisions()
+
+function handLeft()
+   io.write("!LLLLL!")
+end
+
+function handRight()
+   io.write("!RRRRR!")
+end
+
+function handFist()
+   io.write("!FIST!")
+end
+
