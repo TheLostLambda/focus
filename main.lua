@@ -67,3 +67,5 @@ end
 function between(p, p1, p2)
    return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
 end
+
+function collisions()
