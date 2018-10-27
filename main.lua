@@ -1,5 +1,5 @@
 function love.load()
-   gravity = 400
+   gravity = 2000
    groundLevel = 100
    player = { x = 50,
 	      y = groundLevel,
@@ -12,6 +12,15 @@ function love.keypressed(key)
    if player.y == groundLevel and key == "space" then
       player.vy = player.vy + 200
    end
+   if key == "space" then
+      gravity = gravity - 1800
+   end
+end
+
+	function love.keyreleased(key)
+	if key == "space" then
+	gravity = gravity + 1800
+	end
 end
 
 function love.update(dt)
@@ -21,7 +30,7 @@ function love.update(dt)
       player.y = groundLevel
       player.vy = 0
    else
-     player.vy = player.vy - gravity * dt
+      player.vy = player.vy - gravity * dt
    end
 end
    
