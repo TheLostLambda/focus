@@ -1,6 +1,6 @@
-require "control"
+--require "control"
 
-local thread
+--local thread
 
 function love.load()
    gravity = 1000
@@ -10,10 +10,9 @@ function love.load()
    jumpPower = 300
    player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
-
-   thread = love.thread.newThread( [[require "control"
-   control.setup(love)]] )
-   thread:start( 99, 1000 )
+   --thread = love.thread.newThread( [[require "control"
+   --control.setup(love)]] )
+   --thread:start( 99, 1000 )
 end
 
 function love.keypressed(key)
@@ -42,7 +41,7 @@ function love.update(dt)
    elseif love.keyboard.isDown("right") then
       player.x = player.x + speed * dt
    end
-   --io.write("Im awake")
+   --[[
    local info = love.thread.getChannel( 'info' ):pop()
    if info then
       io.write(info.."\n")
@@ -54,7 +53,7 @@ function love.update(dt)
       elseif string.match(info, "fist") then
          handFist()
       end
-   end
+   end]]
 end
 
 function love.draw()
@@ -62,7 +61,6 @@ function love.draw()
    love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
-   love.graphics.print(tostring(between({2,3}, {1,1}, {3,3})))
 end
 
 
@@ -77,8 +75,8 @@ function between(p, p1, p2)
    return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
 end
 
-function collisions()
-
+--function collisions()
+--[[
 function handLeft()
    io.write("!LLLLL!")
 end
@@ -90,4 +88,4 @@ end
 function handFist()
    io.write("!FIST!")
 end
-
+]]
