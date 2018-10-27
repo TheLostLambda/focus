@@ -1,5 +1,6 @@
 function love.load()
-   gravity = 1000
+   gravity = 750
+   speed = 150
    floatFactor = 0.2
    groundLevel = 100
    player = { x = 50,
@@ -29,10 +30,10 @@ function love.update(dt)
       end
    end
     if love.keyboard.isDown("left") then
-		player.x = player.x - 100 * dt
-	elseif love.keyboard.isDown("right") then
-		player.x = player.x + 100 * dt
-	end
+       player.x = player.x - speed * dt
+    elseif love.keyboard.isDown("right") then
+       player.x = player.x + speed * dt
+    end
 end
    
 function love.draw()
