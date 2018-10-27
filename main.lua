@@ -4,7 +4,7 @@ function love.load()
    floatFactor = 0.2
    groundLevel = 100
    jumpPower = 300
-   player = { x = 50, y = groundLevel, vx = 0, vy = 0 }
+   player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
 end
 
@@ -36,7 +36,7 @@ end
    
 function love.draw()
    love.graphics.setColor(1, 1, 1)
-   love.graphics.rectangle("fill", player.x, winy - player.y, 50, -50)
+   love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
 end
