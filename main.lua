@@ -10,8 +10,8 @@ end
 
 function love.keypressed(key)
    if player.y == groundLevel and key == "space" then
-      player.vy = player.vy + 200
-   elseif player y == groundLevel and key == "" then
+		player.vy = player.vy + 200
+   end
 end
 
 function love.update(dt)
@@ -23,17 +23,11 @@ function love.update(dt)
    else
      player.vy = player.vy - gravity * dt
    end
-end
-
-function love.update(dt)
-   player.x = player.x + 100 * dt
-   player.y = player.y + player.vy * dt
-   if player.y < groundLevel then
-      player.y = groundLevel
-      player.vy = 0
-   else
-     player.vy = player.vy - gravity * dt
-   end
+    if love.keyboard.isDown("left") then
+		player.x = player.x - 100 * dt
+	elseif love.keyboard.isDown("right") then
+		player.x = player.x + 100 * dt
+	end
 end
    
 function love.draw()
