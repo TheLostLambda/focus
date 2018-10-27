@@ -8,8 +8,10 @@ function love.load()
    floatFactor = 0.5
    groundLevel = 100
    jumpPower = 575
+   scrollSpeed = 50
+   shift = 0
    world = {}
-   player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
+   player = { x = 50, y = groundLevel, vx = scrollSpeed, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
    --thread = love.thread.newThread( [[require "control"
    --control.setup(love)]] )
@@ -21,6 +23,10 @@ function love.load()
    obstacles()
    obstacles()
    obstacles()
+   newBlock(500, 100, 50, 150)
+   newBlock(550, 100, 50, 100)
+   newBlock(600, 100, 150, 20)
+   newBlock(750, 100, 50, 100)
 end
 
 function obstacles()
@@ -31,10 +37,6 @@ function obstacles()
       vy = -10,
       w = 10,
       h = 10 }
-   newBlock(500, 100, 50, 150)
-   newBlock(550, 100, 50, 100)
-   newBlock(600, 100, 150, 20)
-   newBlock(750, 100, 50, 100)
 end
 
 function newBlock(x, y, w, h)
@@ -49,12 +51,30 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
+   oldx = player.x
+   oldy = player.y
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
-   hitEdge = collisions(player, world)[1]
-   if hitEdge ~= nil then
-      player.y = hitEdge[2].y + hitEdge[2].h
-      player.vy = 0
+   collideroonis = collisions(player,world)
+   for i = 1, #collideroonis do
+      hitEdge = collideroonis[i]
+      if hitEdge ~= nil then
+	 top = hitEdge[2].y + hitEdge[2].h
+	 left = hitEdge[2].x
+	 right = hitEdge[2].x + hitEdge[2].w
+	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top then
+	    player.y = top
+	    player.vy = 0
+	 end
+	 if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
+	    player.x = left - player.w
+	    player.vx = scrollSpeed
+	 end
+	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
+	    player.x = right
+	    player.vx = scrollSpeed
+	 end
+      end
    end
    if player.y < groundLevel then
       player.y = groundLevel
@@ -67,11 +87,11 @@ function love.update(dt)
       end
    end
    if love.keyboard.isDown("left") then
-      player.vx = -speed
+      player.vx = scrollSpeed - speed
    elseif love.keyboard.isDown("right") then
-      player.vx = speed
+      player.vx = scrollSpeed + speed
    else
-      player.vx = 0
+      player.vx = scrollSpeed
    end
    --[[
    local info = love.thread.getChannel( 'info' ):pop()
@@ -96,6 +116,7 @@ function love.update(dt)
       timePassed = 0
       obstacles()
    end
+   shift = shift + scrollSpeed * dt
 end
 
 function love.draw()
@@ -107,11 +128,11 @@ function love.draw()
    for i = 1, #world do  
       love.graphics.setColor(1,0,0)
       block = world[i]
-      love.graphics.rectangle("fill", block.x, winy - block.y, block.w, -block.h)
+      love.graphics.rectangle("fill", block.x - shift, winy - block.y, block.w, -block.h)
    end
    love.graphics.print(tostring(collisions(player, world)[1]))
    love.graphics.setColor(1, 1, 1)
-   love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
+   love.graphics.rectangle("fill", player.x - shift, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
 end
