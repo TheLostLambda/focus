@@ -45,7 +45,15 @@ function love.update(dt)
    --io.write("Im awake")
    local info = love.thread.getChannel( 'info' ):pop()
    if info then
-      io.write(info)
+      io.write(info.."\n")
+      if string.match(info, "waveIn") then
+         io.write("!!!")
+         handLeft()
+      elseif string.match(info, "waveOut") then
+         handRight()
+      elseif string.match(info, "fist") then
+         handFist()
+      end
    end
 end
 
@@ -54,4 +62,16 @@ function love.draw()
    love.graphics.rectangle("fill", player.x, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
+end
+
+function handLeft()
+   io.write("!LLLLL!")
+end
+
+function handRight()
+   io.write("!RRRRR!")
+end
+
+function handFist()
+   io.write("!FIST!")
 end
