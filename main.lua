@@ -4,7 +4,9 @@ function love.load()
    speed = 150
    floatFactor = 0.2
    groundLevel = 100
+   timer = 0
    timePassed = 0
+   justObstacle = false
    oWorld = {}
    player = { x = 50,
 	      y = groundLevel,
@@ -12,9 +14,6 @@ function love.load()
 	      vy = 0 }
    winx, winy = love.graphics.getDimensions()
    math.randomseed(os.time())
-   obstacles()
-   obstacles()
-   obstacles()
 end
 
 function obstacles()
@@ -59,11 +58,17 @@ function love.update(dt)
 		obs.vy = obs.vy + gravity * dt
 	end
 	
-	timePassed = timePassed + dt
-	if timePassed == 5 then
-		timePassed = 0
+	timer = timer + dt
+	if math.floor(timer) % 3 == 0 and not justObstacle then
 		obstacles()
+		justObstacle = true
+ 	elseif math.floor(timer) % 3 ~= 0 then
+		justObstacle = false
 	end
+	
+--	if math.floor(timer) % 2 == 0 then
+--		obstacles()
+--	end
 end
    
 function love.draw()
@@ -72,7 +77,7 @@ function love.draw()
 		obstacle = oWorld[i]
 		love.graphics.rectangle("fill", obstacle.x, winy-obstacle.y, obstacle.w, -obstacle.h)
 	end
-	love.graphics.print(tostring(#oWorld))
+	love.graphics.print(tostring(timer))
    love.graphics.setColor(1, 1, 1)
    love.graphics.rectangle("fill", player.x, winy - player.y, 50, -50)
    love.graphics.setColor(0, 1, 1)
