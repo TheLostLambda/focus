@@ -1,6 +1,20 @@
 --require "control"
-
 --local thread
+require "physics"
+
+function obstacles()
+   oWorld[#oWorld + 1] = { 
+      x = math.random(shift,winx-50+shift),
+      y = winy,
+      vx = 0,
+      vy = 100,
+      w = 40,
+      h = 40 }
+end
+
+function newBlock(x, y, w, h)
+   world[#world+1] = {x = x, y = y, w = w, h = h}
+end
 
 function love.load()
    rip = false
@@ -33,20 +47,6 @@ function love.load()
    newBlock(500, 300, 300, 50)
 end
 
-function obstacles()
-   oWorld[#oWorld + 1] = { 
-      x = math.random(shift,winx-50+shift),
-      y = winy,
-      vx = 0,
-      vy = 100,
-      w = 40,
-      h = 40 }
-end
-
-function newBlock(x, y, w, h)
-	world[#world+1] = {x = x, y = y, w = w, h = h}
-end
-
 function love.keypressed(key)
    if key == "r" then
       love.load()
@@ -54,7 +54,7 @@ function love.keypressed(key)
    if key == "escape" then
       love.event.quit()
    end
-   hitEdge = collisions(player, world)[1]
+   hitEdge = physics.collisions(player, world)[1]
    if (player.y == groundLevel or hitEdge ~= nil) and key == "space" then
       player.vy = jumpPower
    end
@@ -64,14 +64,14 @@ function love.update(dt)
    if rip then
       return
    end
-   if #collisions(player, oWorld) > 0 then
+   if #physics.collisions(player, oWorld) > 0 then
       rip = true
    end
    oldx = player.x
    oldy = player.y
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
-   collideroonis = collisions(player,world)
+   collideroonis = physics.collisions(player,world)
    for i = 1, #collideroonis do
       hitEdge = collideroonis[i]
       if hitEdge ~= nil then
@@ -165,42 +165,6 @@ function love.draw()
    end
 end
 
-
-function boundingPoints(obj)
-   points = {}
-   points[1] = {obj.x, obj.y}
-   points[2] = {obj.x + obj.w, obj.y + obj.h}
-   points[3] = {obj.x, obj.y + obj.h}
-   points[4] = {obj.x + obj.w, obj.y}
-   return points
-end
-
-function between(p, p1, p2)
-   return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
-end
-
-function inside(p, obj)
-   bounds = boundingPoints(obj)
-   return between(p, bounds[1], bounds[2])
-end
-
--- 1 : Bottom left
--- 2 : Top Right
--- 3 : Top Left
--- 4 : Bottom Right
-function collisions(obj, w)
-   rektdBy = {}
-   box = boundingPoints(obj)
-   for i, obstacle in ipairs(w) do
-      for j = 1, #box do
-	 if inside(box[j], obstacle) then
-	    rektdBy[#rektdBy+1] = {j, obstacle}
-	    break
-	 end
-      end
-   end
-   return rektdBy
-end
 --[[
 function handLeft()
    io.write("!LLLLL!")
