@@ -108,14 +108,10 @@ function love.update(dt)
 	 left = hitEdge[2].x
 	 right = hitEdge[2].x + hitEdge[2].w
 	 bottom = hitEdge[2].y
-	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top then
-	    player.y = top
-	    player.vy = 0
-	 end
 	 if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
 	    player.x = left - player.w
 	    player.vx = scrollSpeed
-	    if player.x < shift then
+	    if player.x <= shift then
 	       rip = true
 	       return
 	    end
@@ -123,6 +119,13 @@ function love.update(dt)
 	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
 	    player.x = right
 	    player.vx = scrollSpeed
+	 end
+	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
+	 player.x ~= right and player.x + player.w ~= left then
+	    print(player.x)
+	    print(right)
+	    player.y = top
+	    player.vy = 0
 	 end
 	 if (hitEdge[1] == 2 or hitEdge[1] == 3) and oldy + player.h <= bottom then
 	    player.y = bottom - player.h
