@@ -45,6 +45,26 @@ function love.load()
    newBlock(600, 100, 150, 20)
    newBlock(750, 100, 50, 100)
    newBlock(500, 300, 300, 50)
+   
+   newBlock(750, 100, 50, 150)
+   newBlock(850, 100, 300, 200)
+   newBlock(850, 350, 300, 100)
+   newBlock(900, 300, 300, 50)
+   newBlock(1250, 150, 50, 300)
+   newBlock(1200, 200, 50, 50)
+   
+   newBlock(1400, 100, 50, 50)
+   newBlock(1450, 100, 50, 100)
+   newBlock(1500, 100, 50, 150)
+   newBlock(1550, 100, 50, 200)
+   newBlock(1600, 100, 50, 250)
+   newBlock(1650, 100, 50, 300)
+   
+   newBlock(1650, 350, 50, 100)   
+   newBlock(1700, 300, 450, 50)
+   newBlock(1750, 200, 450, 50)
+   newBlock(2200, 150, 50, 500)
+
 end
 
 function love.keypressed(key)
