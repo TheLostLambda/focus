@@ -97,6 +97,14 @@ function love.update(dt)
 	 end
       end
    end
+   if player.x < shift then
+      player.x = shift
+      player.vx = scrollSpeed
+   end
+   if player.x + player.w > shift + winx then
+      player.x = shift + winx - player.w
+      player.vx = scrollSpeed
+   end
    if player.y < groundLevel then
       player.y = groundLevel
       player.vy = 0
