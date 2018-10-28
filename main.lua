@@ -3,6 +3,7 @@
 --local thread
 
 function love.load()
+   rip = false
    gravity = 2000
    speed = 230
    floatFactor = 0.5
@@ -10,19 +11,19 @@ function love.load()
    jumpPower = 575
    scrollSpeed = 50
    shift = 0
+   rainDelay = 2
    world = {}
-   player = { x = 50, y = groundLevel, vx = scrollSpeed, vy = 0, w = 50, h = 50}
+   player = { x = 30, y = groundLevel, vx = scrollSpeed, vy = 0, w = 30, h = 30}
    winx, winy = love.graphics.getDimensions()
    --thread = love.thread.newThread( [[require "control"
    --control.setup(love)]] )
    --thread:start( 99, 1000 )
+   timer = 0
    timePassed = 0
+   justObstacle = false
    oWorld = {}
    winx, winy = love.graphics.getDimensions()
    math.randomseed(os.time())
-   obstacles()
-   obstacles()
-   obstacles()
    newBlock(500, 100, 50, 150)
    newBlock(550, 100, 50, 100)
    newBlock(600, 100, 150, 20)
@@ -31,12 +32,12 @@ end
 
 function obstacles()
    oWorld[#oWorld + 1] = { 
-      x = math.random(0,winx-10),
+      x = math.random(shift,winx-50+shift),
       y = winy,
       vx = 0,
-      vy = -10,
-      w = 10,
-      h = 10 }
+      vy = 100,
+      w = 40,
+      h = 40 }
 end
 
 function newBlock(x, y, w, h)
@@ -51,6 +52,12 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
+   if rip then
+      love.load()
+   end
+   if #collisions(player, oWorld) > 0 then
+      rip = true
+   end
    oldx = player.x
    oldy = player.y
    player.x = player.x + player.vx * dt
@@ -109,28 +116,30 @@ function love.update(dt)
    for i=1, #oWorld do
       obs = oWorld[i]
       obs.y = obs.y - obs.vy * dt
-      obs.vy = obs.vy + gravity * dt
-   end
-   timePassed = timePassed + dt
-   if timePassed == 5 then
-      timePassed = 0
-      obstacles()
+      obs.x = obs.x - obs.vx * dt
    end
    shift = shift + scrollSpeed * dt
+   timer = timer + dt
+   if math.floor(timer) % rainDelay == 0 and not justObstacle then
+      obstacles()
+      justObstacle = true
+   elseif math.floor(timer) % rainDelay ~= 0 then
+      justObstacle = false
+   end
 end
 
 function love.draw()
    love.graphics.setColor(1, 0, 1)
    for i=1, #oWorld do
       obstacle = oWorld[i]
-      love.graphics.rectangle("fill", obstacle.x, winy-obstacle.y, obstacle.w, -obstacle.h)
+      love.graphics.rectangle("fill", obstacle.x - shift, winy-obstacle.y, obstacle.w, -obstacle.h)
    end
    for i = 1, #world do  
       love.graphics.setColor(1,0,0)
       block = world[i]
       love.graphics.rectangle("fill", block.x - shift, winy - block.y, block.w, -block.h)
    end
-   love.graphics.print(tostring(collisions(player, world)[1]))
+   love.graphics.print(tostring(#collisions(player,oWorld)))
    love.graphics.setColor(1, 1, 1)
    love.graphics.rectangle("fill", player.x - shift, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
@@ -160,10 +169,10 @@ end
 -- 2 : Top Right
 -- 3 : Top Left
 -- 4 : Bottom Right
-function collisions(obj, world)
+function collisions(obj, w)
    rektdBy = {}
    box = boundingPoints(obj)
-   for i, obstacle in ipairs(world) do
+   for i, obstacle in ipairs(w) do
       for j = 1, #box do
 	 if inside(box[j], obstacle) then
 	    rektdBy[#rektdBy+1] = {j, obstacle}
