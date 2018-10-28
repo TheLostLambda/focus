@@ -198,19 +198,20 @@ function love.update(dt)
 end
 
 function love.draw()
-   love.graphics.setColor(1, 0, 1)
+   love.graphics.setBackgroundColor(135 / 255, 206 / 255, 235 / 255)
+   love.graphics.setColor(234 / 255, 72 / 255, 0)
    for i=1, #oWorld do
       obstacle = oWorld[i]
       love.graphics.rectangle("fill", obstacle.x - shift, winy-obstacle.y, obstacle.w, -obstacle.h)
    end
    for i = 1, #world do  
-      love.graphics.setColor(1,0,0)
+      love.graphics.setColor(166 / 255, 128 / 255, 100 / 255)
       block = world[i]
       love.graphics.rectangle("fill", block.x - shift, winy - block.y, block.w, -block.h)
    end
-   love.graphics.setColor(1, 1, 1)
+   love.graphics.setColor(0.3, 0.3, 0.3)
    love.graphics.rectangle("fill", player.x - shift, winy - player.y, player.w, -player.h)
-   love.graphics.setColor(0, 1, 1)
+   love.graphics.setColor(63 / 255, 112 / 255, 77 / 255)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
    if rip or win then
       love.graphics.setColor(0, 0, 0, 0.75)
