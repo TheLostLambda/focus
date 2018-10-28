@@ -16,6 +16,10 @@ function newBlock(x, y, w, h)
    world[#world+1] = {x = x, y = y, w = w, h = h}
 end
 
+function newLava(x, y, w, h)
+   oWorld[#oWorld+1] = {x = x, y = y, w = w, h = h, vx = 0, vy = 0}
+end
+
 function love.load()
    rip = false
    win = false
@@ -49,11 +53,11 @@ function love.load()
       newBlock(550, 100, 50, 100)
       newBlock(600, 100, 150, 20)
       newBlock(750, 100, 50, 100)
-      newBlock(500, 300, 300, 50)
+      newLava(600, 120, 150, 60) 
       
       newBlock(750, 100, 50, 150)
       newBlock(850, 100, 300, 200)
-      newBlock(850, 400, 300, 100)
+      newBlock(850, 400, 300, 60)
       newBlock(900, 300, 300, 100)
       newBlock(1250, 150, 50, 300)
       newBlock(1200, 200, 50, 50)
