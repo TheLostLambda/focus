@@ -15,6 +15,8 @@ function love.load()
    world = {}
    player = { x = 30, y = groundLevel, vx = scrollSpeed, vy = 0, w = 30, h = 30}
    winx, winy = love.graphics.getDimensions()
+   love.graphics.setNewFont(64)
+   love.window.setTitle("Focus")
    --thread = love.thread.newThread( [[require "control"
    --control.setup(love)]] )
    --thread:start( 99, 1000 )
@@ -28,6 +30,7 @@ function love.load()
    newBlock(550, 100, 50, 100)
    newBlock(600, 100, 150, 20)
    newBlock(750, 100, 50, 100)
+   newBlock(500, 300, 300, 50)
 end
 
 function obstacles()
@@ -45,6 +48,12 @@ function newBlock(x, y, w, h)
 end
 
 function love.keypressed(key)
+   if key == "r" then
+      love.load()
+   end
+   if key == "escape" then
+      love.event.quit()
+   end
    hitEdge = collisions(player, world)[1]
    if (player.y == groundLevel or hitEdge ~= nil) and key == "space" then
       player.vy = jumpPower
@@ -53,7 +62,7 @@ end
 
 function love.update(dt)
    if rip then
-      love.load()
+      return
    end
    if #collisions(player, oWorld) > 0 then
       rip = true
@@ -69,6 +78,7 @@ function love.update(dt)
 	 top = hitEdge[2].y + hitEdge[2].h
 	 left = hitEdge[2].x
 	 right = hitEdge[2].x + hitEdge[2].w
+	 bottom = hitEdge[2].y
 	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top then
 	    player.y = top
 	    player.vy = 0
@@ -80,6 +90,10 @@ function love.update(dt)
 	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
 	    player.x = right
 	    player.vx = scrollSpeed
+	 end
+	 if (hitEdge[1] == 2 or hitEdge[1] == 3) and oldy + player.h <= bottom then
+	    player.y = bottom - player.h
+	    player.vy = 0
 	 end
       end
    end
@@ -139,11 +153,16 @@ function love.draw()
       block = world[i]
       love.graphics.rectangle("fill", block.x - shift, winy - block.y, block.w, -block.h)
    end
-   love.graphics.print(tostring(#collisions(player,oWorld)))
    love.graphics.setColor(1, 1, 1)
    love.graphics.rectangle("fill", player.x - shift, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
+   if rip then
+      love.graphics.setColor(0, 0, 0, 0.75)
+      love.graphics.rectangle("fill", 0, 0, winx, winy)
+      love.graphics.setColor(1,1,1)
+      love.graphics.printf("RIP\n(Press 'r' to restart)", 0, winy * 0.33, winx, "center")
+   end
 end
 
 
