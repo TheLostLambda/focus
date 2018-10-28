@@ -28,8 +28,8 @@
       <file leaf-file-name="main.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1109">
-              <caret line="167" column="6" selection-start-line="167" selection-start-column="6" selection-end-line="167" selection-end-column="6" />
+            <state relative-caret-position="555">
+              <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -40,7 +40,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-10830">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1540719863082" expanded="true" signature="59:49746" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -774,7 +776,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1540649793164</updated>
-      <workItem from="1540649797166" duration="26064000" />
+      <workItem from="1540649797166" duration="28769000" />
     </task>
     <task id="LOCAL-00001" summary="Add interface control">
       <created>1540665934071</created>
@@ -811,11 +813,25 @@
       <option name="project" value="LOCAL" />
       <updated>1540708585303</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="remove verbose logging">
+      <created>1540713829607</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1540713829607</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'remotes/origin/master' into tom&#10;&#10;# Conflicts:&#10;#&#9;main.lua&#10;">
+      <created>1540717897494</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1540717897495</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26064000" />
+    <option name="totallyTimeSpent" value="28769000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -825,14 +841,14 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329602" sideWeight="0.50277776" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329602" sideWeight="0.50277776" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329602" sideWeight="0.49722221" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -865,7 +881,9 @@
     <MESSAGE value="Add callbacks to main for myo inputs" />
     <MESSAGE value="Swap to proportional control" />
     <MESSAGE value="Merge latest master" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge latest master" />
+    <MESSAGE value="remove verbose logging" />
+    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/master' into tom&#10;&#10;# Conflicts:&#10;#&#9;main.lua&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'remotes/origin/master' into tom&#10;&#10;# Conflicts:&#10;#&#9;main.lua&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -904,14 +922,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-10830">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1540719863082" expanded="true" signature="59:49746" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1109">
-          <caret line="167" column="6" selection-start-line="167" selection-start-column="6" selection-end-line="167" selection-end-column="6" />
+        <state relative-caret-position="555">
+          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
           <folding />
         </state>
       </provider>

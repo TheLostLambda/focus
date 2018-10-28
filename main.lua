@@ -6,7 +6,7 @@ local thread
 require "physics"
 
 function obstacles()
-   oWorld[#oWorld + 1] = { 
+   oWorld[#oWorld + 1] = {
       x = math.random(shift,winx-50+shift),
       y = winy,
       vx = 0,
@@ -32,13 +32,15 @@ function love.load()
    shift = 0
    math.randomseed(os.time())
 
-    thread = love.thread.newThread( [[require "control"
+   if thread == nil then
+      thread = love.thread.newThread( [[require "control"
    control.setup(love)]] )
-    thread:start( 99, 1000 )
+      thread:start( 99, 1000 )
+   end
 
-    jumping = false
-    goLeft = false
-    goRight = false
+   jumping = false
+   goLeft = false
+   goRight = false
 
    if level == nil then
       level = 1
@@ -96,12 +98,12 @@ function transform(x)
 end
 
 function love.keypressed(key)
-    if key == "r" then
-        love.load()
-    end
-    if key == "escape" then
-        love.event.quit()
-    end
+   if key == "r" then
+      love.load()
+   end
+   if key == "escape" then
+      love.event.quit()
+   end
    if key == "space" then
       doJump()
    end
@@ -125,33 +127,33 @@ function love.update(dt)
    for i = 1, #collideroonis do
       hitEdge = collideroonis[i]
       if hitEdge ~= nil then
-	 top = hitEdge[2].y + hitEdge[2].h
-	 left = hitEdge[2].x
-	 right = hitEdge[2].x + hitEdge[2].w
-	 bottom = hitEdge[2].y
-	 if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
-	    player.x = left - player.w
-	    player.vx = scrollSpeed
-	    if player.x <= shift then
-	       rip = true
-	       return
-	    end
-	 end
-	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
-	    player.x = right
-	    player.vx = scrollSpeed
-	 end
-	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
-	 player.x ~= right and player.x + player.w ~= left then
-	    print(player.x)
-	    print(right)
-	    player.y = top
-	    player.vy = 0
-	 end
-	 if (hitEdge[1] == 2 or hitEdge[1] == 3) and oldy + player.h <= bottom then
-	    player.y = bottom - player.h
-	    player.vy = 0
-	 end
+         top = hitEdge[2].y + hitEdge[2].h
+         left = hitEdge[2].x
+         right = hitEdge[2].x + hitEdge[2].w
+         bottom = hitEdge[2].y
+         if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
+            player.x = left - player.w
+            player.vx = scrollSpeed
+            if player.x <= shift then
+               rip = true
+               return
+            end
+         end
+         if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
+            player.x = right
+            player.vx = scrollSpeed
+         end
+         if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
+                 player.x ~= right and player.x + player.w ~= left then
+            print(player.x)
+            print(right)
+            player.y = top
+            player.vy = 0
+         end
+         if (hitEdge[1] == 2 or hitEdge[1] == 3) and oldy + player.h <= bottom then
+            player.y = bottom - player.h
+            player.vy = 0
+         end
       end
    end
    if player.x < shift then
@@ -197,13 +199,13 @@ function love.update(dt)
    local data = love.thread.getChannel( 'data' ):pop()
    if data then
 
---         io.write("1: " .. data[1] .. " 2: " .. data[2] .. " 3: " .. data[3] .. " 4: " .. data[4] .. "\n")
-   --6 up
-   --8 left
-   --4 right
-   --2 down
-      player.vy = (transform(data[3]) - transform(data[1]))*2000
-      player.vx = (transform(data[4]) - transform(data [2]))*500
+      --         io.write("1: " .. data[1] .. " 2: " .. data[2] .. " 3: " .. data[3] .. " 4: " .. data[4] .. "\n")
+      --6 up
+      --8 left
+      --4 right
+      --2 down
+      --      player.vy = (transform(data[3]) - transform(data[1]))*2000
+      --      player.vx = (transform(data[4]) - transform(data [2]))*500
 
 
    end
@@ -228,7 +230,7 @@ function love.draw()
       obstacle = oWorld[i]
       love.graphics.rectangle("fill", obstacle.x - shift, winy-obstacle.y, obstacle.w, -obstacle.h)
    end
-   for i = 1, #world do  
+   for i = 1, #world do
       love.graphics.setColor(1,0,0)
       block = world[i]
       love.graphics.rectangle("fill", block.x - shift, winy - block.y, block.w, -block.h)
@@ -242,10 +244,10 @@ function love.draw()
       love.graphics.rectangle("fill", 0, 0, winx, winy)
       love.graphics.setColor(1,1,1)
       if rip then
-	 love.graphics.printf("RIP\n(Press 'r' to restart)", 0, winy * 0.33, winx, "center")
+         love.graphics.printf("RIP\n(Press 'r' to restart)", 0, winy * 0.33, winx, "center")
       else
-	 love.graphics.printf("You Win!\n(Press 'r' to continue)", 0, winy * 0.33, winx, "center")
-	 level = level + 1
+         love.graphics.printf("You Win!\n(Press 'r' to continue)", 0, winy * 0.33, winx, "center")
+         level = level + 1
       end
    end
 end
