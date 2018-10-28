@@ -61,6 +61,7 @@ function love.load()
       newBlock(900, 300, 300, 100)
       newBlock(1250, 150, 50, 300)
       newBlock(1200, 200, 50, 50)
+      newLava(1150, 100, 350, 40)
       
       newBlock(1400, 100, 50, 50)
       newBlock(1450, 100, 50, 100)
