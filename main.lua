@@ -6,7 +6,7 @@ local thread
 require "physics"
 
 function obstacles()
-   oWorld[#oWorld + 1] = {
+   oWorld[#oWorld + 1] = { 
       x = math.random(shift,winx-50+shift),
       y = winy,
       vx = 0,
@@ -21,49 +21,67 @@ end
 
 function love.load()
    rip = false
-   gravity = 2000
-   speed = 230
-   floatFactor = 0.5
-   groundLevel = 100
-   jumpPower = 575
-   scrollSpeed = 50
-   shift = 0
-   rainDelay = 2
-   world = {}
-   player = { x = 30, y = groundLevel, vx = scrollSpeed, vy = 0, w = 30, h = 30}
+   win = false
    winx, winy = love.graphics.getDimensions()
-   thread = love.thread.newThread( [[require "control"
-   control.setup(love)]] )
-   thread:start( 99, 1000 )
    love.graphics.setNewFont(64)
    love.window.setTitle("Focus")
-   timer = 0
-   timePassed = 0
-   justObstacle = false
    oWorld = {}
-   winx, winy = love.graphics.getDimensions()
+   world = {}
+   justObstacle = false
+   timer = 0
+   shift = 0
    math.randomseed(os.time())
-   obstacles()
-   obstacles()
-   obstacles()
-   jumping = false
-   goLeft = false
-   goRight = false
-end
 
-function obstacles()
-   oWorld[#oWorld + 1] = { 
-      x = math.random(0,winx-10),
-      y = winy,
-      vx = 0,
-      vy = -10,
-      w = 10,
-      h = 10 }
-   newBlock(500, 100, 50, 150)
-   newBlock(550, 100, 50, 100)
-   newBlock(600, 100, 150, 20)
-   newBlock(750, 100, 50, 100)
-   newBlock(500, 300, 300, 50)
+    thread = love.thread.newThread( [[require "control"
+   control.setup(love)]] )
+    thread:start( 99, 1000 )
+
+    jumping = false
+    goLeft = false
+    goRight = false
+
+   if level == nil then
+      level = 1
+   end
+
+   if level == 1 then
+      gravity = 2000
+      speed = 230
+      floatFactor = 0.5
+      groundLevel = 100
+      jumpPower = 575
+      scrollSpeed = 50
+      rainDelay = 2
+      player = { x = 30, y = groundLevel, vx = scrollSpeed, vy = 0, w = 30, h = 30}
+      --thread = love.thread.newThread( [[require "control"
+      --control.setup(love)]] )
+      --thread:start( 99, 1000 )
+      newBlock(500, 100, 50, 150)
+      newBlock(550, 100, 50, 100)
+      newBlock(600, 100, 150, 20)
+      newBlock(750, 100, 50, 100)
+      newBlock(500, 300, 300, 50)
+
+      newBlock(750, 100, 50, 150)
+      newBlock(850, 100, 300, 200)
+      newBlock(850, 400, 300, 100)
+      newBlock(900, 300, 300, 100)
+      newBlock(1250, 150, 50, 300)
+      newBlock(1200, 200, 50, 50)
+
+      newBlock(1400, 100, 50, 50)
+      newBlock(1450, 100, 50, 100)
+      newBlock(1500, 100, 50, 150)
+      newBlock(1550, 100, 50, 200)
+      newBlock(1600, 100, 50, 250)
+      newBlock(1650, 100, 50, 300)
+
+      newBlock(1650, 350, 50, 100)
+      newBlock(1700, 300, 450, 50)
+      newBlock(1750, 200, 450, 50)
+      newBlock(2200, 150, 50, 500)
+      winPoint = 2300
+   end
 end
 
 function doJump()
@@ -93,6 +111,9 @@ function love.update(dt)
    if rip then
       return
    end
+   if player.x > winPoint then
+      win = true
+   end
    if #physics.collisions(player, oWorld) > 0 then
       rip = true
    end
@@ -108,17 +129,24 @@ function love.update(dt)
 	 left = hitEdge[2].x
 	 right = hitEdge[2].x + hitEdge[2].w
 	 bottom = hitEdge[2].y
-	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top then
-	    player.y = top
-	    player.vy = 0
-	 end
 	 if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
 	    player.x = left - player.w
 	    player.vx = scrollSpeed
+	    if player.x <= shift then
+	       rip = true
+	       return
+	    end
 	 end
 	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
 	    player.x = right
 	    player.vx = scrollSpeed
+	 end
+	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
+	 player.x ~= right and player.x + player.w ~= left then
+	    print(player.x)
+	    print(right)
+	    player.y = top
+	    player.vy = 0
 	 end
 	 if (hitEdge[1] == 2 or hitEdge[1] == 3) and oldy + player.h <= bottom then
 	    player.y = bottom - player.h
@@ -136,18 +164,18 @@ function love.update(dt)
    end
    if player.y < groundLevel then
       player.y = groundLevel
-        player.vy = 0
+      player.vy = 0
    else
-      if love.keyboard.isDown("space") or jumping then
---         player.vy = player.vy - gravity * dt * floatFactor
+      if love.keyboard.isDown("space") then
+         player.vy = player.vy - gravity * dt * floatFactor
       else
---         player.vy = player.vy - gravity * dt
+         player.vy = player.vy - gravity * dt
       end
    end
-   if love.keyboard.isDown("left") or goLeft then
---      player.vx = scrollSpeed - speed
-   elseif love.keyboard.isDown("right") or goRight then
---      player.vx = scrollSpeed + speed
+   if love.keyboard.isDown("left") then
+      player.vx = scrollSpeed - speed
+   elseif love.keyboard.isDown("right") then
+      player.vx = scrollSpeed + speed
    else
       player.vx = scrollSpeed
    end
@@ -209,40 +237,19 @@ function love.draw()
    love.graphics.rectangle("fill", player.x - shift, winy - player.y, player.w, -player.h)
    love.graphics.setColor(0, 1, 1)
    love.graphics.rectangle("fill", 0, winy, winx, -groundLevel)
-   if rip then
+   if rip or win then
       love.graphics.setColor(0, 0, 0, 0.75)
       love.graphics.rectangle("fill", 0, 0, winx, winy)
       love.graphics.setColor(1,1,1)
-      love.graphics.printf("RIP\n(Press 'r' to restart)", 0, winy * 0.33, winx, "center")
-   end
-end
-
-function between(p, p1, p2)
-   return p1[1] <= p[1] and p[1] <= p2[1] and p1[2] <= p[2] and p[2] <= p2[2]
-end
-
-function inside(p, obj)
-   bounds = boundingPoints(obj)
-   return between(p, bounds[1], bounds[2])
-end
-
--- 1 : Bottom left
--- 2 : Top Right
--- 3 : Top Left
--- 4 : Bottom Right
-function collisions(obj, world)
-   rektdBy = {}
-   box = boundingPoints(obj)
-   for i, obstacle in ipairs(world) do
-      for j = 1, #box do
-	 if inside(box[j], obstacle) then
-	    rektdBy[#rektdBy+1] = {j, obstacle}
-	    break
-	 end
+      if rip then
+	 love.graphics.printf("RIP\n(Press 'r' to restart)", 0, winy * 0.33, winx, "center")
+      else
+	 love.graphics.printf("You Win!\n(Press 'r' to continue)", 0, winy * 0.33, winx, "center")
+	 level = level + 1
       end
    end
-   return rektdBy
 end
+
 
 function handLeft()
    io.write("!LLLLL!")
