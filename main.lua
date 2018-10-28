@@ -169,13 +169,13 @@ function love.update(dt)
    local data = love.thread.getChannel( 'data' ):pop()
    if data then
 
-         io.write("1: " .. data[1] .. " 2: " .. data[2] .. " 3: " .. data[3] .. " 4: " .. data[4] .. "\n")
+--         io.write("1: " .. data[1] .. " 2: " .. data[2] .. " 3: " .. data[3] .. " 4: " .. data[4] .. "\n")
    --6 up
    --8 left
    --4 right
    --2 down
-      player.vy = (transform(data[3]) - transform(data[1]))*200
-      player.vx = -(transform(data[4]) - transform(data [2]))*50
+      player.vy = (transform(data[3]) - transform(data[1]))*2000
+      player.vx = (transform(data[4]) - transform(data [2]))*500
 
 
    end
