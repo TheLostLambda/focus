@@ -1,6 +1,6 @@
---require "control"
+require "control"
 
---local thread
+local thread
 
 function love.load()
    gravity = 2000
@@ -11,9 +11,9 @@ function love.load()
    world = {}
    player = { x = 50, y = groundLevel, vx = 0, vy = 0, w = 50, h = 50}
    winx, winy = love.graphics.getDimensions()
-   --thread = love.thread.newThread( [[require "control"
-   --control.setup(love)]] )
-   --thread:start( 99, 1000 )
+   thread = love.thread.newThread( [[require "control"
+   control.setup(love)]] )
+   thread:start( 99, 1000 )
    timePassed = 0
    oWorld = {}
    winx, winy = love.graphics.getDimensions()
@@ -21,6 +21,9 @@ function love.load()
    obstacles()
    obstacles()
    obstacles()
+   jumping = false
+   goLeft = false
+   goRight = false
 end
 
 function obstacles()
@@ -41,14 +44,26 @@ function newBlock(x, y, w, h)
 	world[#world+1] = {x = x, y = y, w = w, h = h}
 end
 
-function love.keypressed(key)
+function doJump()
    hitEdge = collisions(player, world)[1]
-   if (player.y == groundLevel or hitEdge ~= nil) and key == "space" then
+   if (player.y == groundLevel or hitEdge ~= nil)  then
       player.vy = jumpPower
    end
 end
 
+function transform(x)
+   return math.exp(-math.abs(x/20))
+end
+
+function love.keypressed(key)
+   if key == "space" then
+      doJump()
+   end
+end
+
 function love.update(dt)
+
+
    player.x = player.x + player.vx * dt
    player.y = player.y + player.vy * dt
    hitEdge = collisions(player, world)[1]
@@ -58,22 +73,22 @@ function love.update(dt)
    end
    if player.y < groundLevel then
       player.y = groundLevel
-      player.vy = 0
+        player.vy = 0
    else
-      if love.keyboard.isDown("space") then
-         player.vy = player.vy - gravity * dt * floatFactor
+      if love.keyboard.isDown("space") or jumping then
+--         player.vy = player.vy - gravity * dt * floatFactor
       else
-         player.vy = player.vy - gravity * dt
+--         player.vy = player.vy - gravity * dt
       end
    end
-   if love.keyboard.isDown("left") then
-      player.vx = -speed
-   elseif love.keyboard.isDown("right") then
-      player.vx = speed
+   if love.keyboard.isDown("left") or goLeft then
+--      player.vx = -speed
+   elseif love.keyboard.isDown("right") or goRight  then
+--      player.vx = speed
    else
-      player.vx = 0
+--      player.vx = 0
    end
-   --[[
+
    local info = love.thread.getChannel( 'info' ):pop()
    if info then
       io.write(info.."\n")
@@ -82,10 +97,25 @@ function love.update(dt)
          handLeft()
       elseif string.match(info, "waveOut") then
          handRight()
-      elseif string.match(info, "fist") then
+      elseif string.match(info, "fist") or string.match(info, "fingerSpread") then
          handFist()
+      elseif string.match(info, "rest") then
+         handRest()
       end
-   end]]
+   end
+   local data = love.thread.getChannel( 'data' ):pop()
+   if data then
+
+         io.write("1: " .. data[1] .. " 2: " .. data[2] .. " 3: " .. data[3] .. " 4: " .. data[4] .. "\n")
+   --6 up
+   --8 left
+   --4 right
+   --2 down
+      player.vy = (transform(data[3]) - transform(data[1]))*200
+      player.vx = -(transform(data[4]) - transform(data [2]))*50
+
+
+   end
    for i=1, #oWorld do
       obs = oWorld[i]
       obs.y = obs.y - obs.vy * dt
@@ -152,16 +182,27 @@ function collisions(obj, world)
    end
    return rektdBy
 end
---[[
+
 function handLeft()
    io.write("!LLLLL!")
+   goLeft = true
 end
 
 function handRight()
    io.write("!RRRRR!")
+   goRight = true
 end
 
 function handFist()
    io.write("!FIST!")
+   jumping = true
+   doJump()
 end
-]]
+
+function handRest()
+   io.write("!REST!")
+   goLeft = false
+   goRight = false
+   jumping = false
+end
+

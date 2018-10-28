@@ -19,6 +19,13 @@ module("control")
 
 --plin = require('pl.pretty')
 
+function uint(n)
+    if n >= 2 ^ 31 then
+        return n - 2 ^ 32
+    end
+    return n
+end
+
 function setup(love)
     --local pl = plin
     pl.dump(msg)
@@ -30,9 +37,11 @@ function setup(love)
         if msg[3] == "s" then
             --pl.dump(msg)
             love.thread.getChannel( 'info' ):push( msg[4] )
+        elseif msg[17] == "i" then
+            love.thread.getChannel( 'data' ):push( {uint(msg[4]), uint(msg[8]), uint(msg[12]), uint(msg[16])} )
         end
     end
-     }
+    }
 
 
 
