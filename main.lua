@@ -85,9 +85,17 @@ function love.keypressed(key)
    if key == "escape" then
       love.event.quit()
    end
-   hitEdge = physics.collisions(player, world)[1]
-   if (player.y == groundLevel or hitEdge ~= nil) and key == "space" then
+   hitEdge = physics.collisions(player, world)
+   if player.y == groundLevel and key == "space" then
       player.vy = jumpPower
+   elseif key == "space" then
+      for i = 1, #hitEdge do
+	 blocky = hitEdge[i]
+	 if blocky[2].y + blocky[2].h <= player.y then
+	    player.vy = jumpPower
+	    break
+	 end
+      end
    end
 end
 
@@ -98,7 +106,7 @@ function love.update(dt)
    if player.x > winPoint then
       win = true
    end
-   if #physics.collisions(player, oWorld) > 0 then
+   if #physics.collisions(player, oWorld) > 0 and not win then
       rip = true
    end
    oldx = player.x
@@ -127,8 +135,6 @@ function love.update(dt)
 	 end
 	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
 	 player.x ~= right and player.x + player.w ~= left then
-	    print(player.x)
-	    print(right)
 	    player.y = top
 	    player.vy = 0
 	 end
