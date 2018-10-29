@@ -45,7 +45,7 @@ function love.load()
       jumpPower = 575
       scrollSpeed = 50
       rainDelay = 2
-      player = { x = 30, y = groundLevel, vx = scrollSpeed, vy = 0, w = 30, h = 30}
+      player = { x = 30, y = groundLevel, vx = 0 --[[scrollSpeed]], vy = 0, w = 30, h = 30}
       --thread = love.thread.newThread( [[require "control"
       --control.setup(love)]] )
       --thread:start( 99, 1000 )
@@ -123,7 +123,7 @@ function love.update(dt)
 	 bottom = hitEdge[2].y
 	 if (hitEdge[1] == 2 or hitEdge[1] == 4) and oldx + player.w <= left then
 	    player.x = left - player.w
-	    player.vx = scrollSpeed
+	    player.vx = 0 --scrollSpeed
 	    if player.x <= shift then
 	       rip = true
 	       return
@@ -131,7 +131,7 @@ function love.update(dt)
 	 end
 	 if (hitEdge[1] == 1 or hitEdge[1] == 3) and oldx >= right then
 	    player.x = right
-	    player.vx = scrollSpeed
+	    player.vx = 0 --scrollSpeed
 	 end
 	 if (hitEdge[1] == 1 or hitEdge[1] == 4) and oldy >= top and
 	 player.x ~= right and player.x + player.w ~= left then
@@ -146,11 +146,18 @@ function love.update(dt)
    end
    if player.x < shift then
       player.x = shift
-      player.vx = scrollSpeed
+      player.vx = 0 --scrollSpeed
+      smush = physics.collisions(player, world)
+      for i = 1, #smush do
+         if smush[i][1] == 2 then
+            rip = true
+	    break
+         end
+      end
    end
    if player.x + player.w > shift + winx then
       player.x = shift + winx - player.w
-      player.vx = scrollSpeed
+      player.vx = 0 --scrollSpeed
    end
    if player.y < groundLevel then
       player.y = groundLevel
@@ -163,11 +170,11 @@ function love.update(dt)
       end
    end
    if love.keyboard.isDown("left") then
-      player.vx = scrollSpeed - speed
+      player.vx = 0 --[[scrollSpeed]] - speed
    elseif love.keyboard.isDown("right") then
-      player.vx = scrollSpeed + speed
+      player.vx = 0 --[[scrollSpeed]] + speed
    else
-      player.vx = scrollSpeed
+      player.vx = 0 --scrollSpeed
    end
    --[[
    local info = love.thread.getChannel( 'info' ):pop()
